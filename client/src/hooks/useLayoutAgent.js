@@ -57,10 +57,23 @@ export function useLayoutAgent() {
           },
         ]);
       } catch (err) {
-        const msg =
+        let msg =
           err.response?.data?.explanation ||
           err.response?.data?.error ||
-          'Something went wrong. Ensure the server is running and your API key is configured.';
+          null;
+
+        if (!msg) {
+          if (err.code === 'ERR_NETWORK' || err.message?.includes('Network Error')) {
+            const api = import.meta.env.VITE_API_URL || '(not set — using /api)';
+            msg = `Cannot reach the API (${api}). On Vercel set VITE_API_URL=https://compara.onrender.com/api and redeploy. On Render set CLIENT_URL to your Vercel URL.`;
+          } else if (err.response?.status === 403 || err.response?.status === 0) {
+            msg =
+              'Request blocked (likely CORS). On Render, set CLIENT_URL to your exact Vercel URL, e.g. https://compara-gzf8.vercel.app';
+          } else {
+            msg = `Something went wrong: ${err.message || 'unknown error'}. Check the browser console (F12).`;
+          }
+        }
+
         setError(msg);
         setMessages((prev) => [...prev, { role: 'assistant', content: msg }]);
       } finally {

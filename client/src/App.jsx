@@ -32,7 +32,10 @@ export default function App() {
         setServerOk(true);
         setLlmConfigured(data.llmConfigured);
       })
-      .catch(() => setServerOk(false));
+      .catch((err) => {
+        console.error('Health check failed:', err);
+        setServerOk(false);
+      });
   }, []);
 
   const applyRecipe = useCallback(

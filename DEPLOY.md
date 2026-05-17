@@ -73,20 +73,30 @@ Must end with `/api` — this is your live Render backend.
 
 ## Step 4 — Link frontend and backend (CORS)
 
-1. In **Render** → your web service → **Environment**.
-2. Set `CLIENT_URL` to your Vercel URL:
+The API auto-allows all `*.vercel.app` domains. You should still set `CLIENT_URL` on Render for custom domains.
+
+1. In **Render** → **compara** service → **Environment**.
+2. Set `CLIENT_URL` to your **exact** Vercel URL (copy from browser address bar):
 
 ```
-https://compara.vercel.app
+https://compara-gzf8.vercel.app
 ```
 
-Multiple origins (preview + production):
+Replace with your real URL if different. Multiple URLs:
 
 ```
-https://compara.vercel.app,https://compara-git-main-hr001784.vercel.app
+https://compara-gzf8.vercel.app,https://compara.vercel.app
 ```
 
-3. Save — Render will redeploy automatically.
+3. Save — Render redeploys (~1 min).
+
+4. On **Vercel** → Settings → Environment Variables — confirm:
+
+```
+VITE_API_URL=https://compara.onrender.com/api
+```
+
+5. **Redeploy Vercel** after any env change (Deployments → Redeploy).
 
 ---
 
