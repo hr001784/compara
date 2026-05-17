@@ -43,9 +43,9 @@ git push -u origin main
 | `CLIENT_URL` | Leave empty for now; add Vercel URL after Step 3 |
 
 7. Click **Deploy**. Wait until status is **Live**.
-8. Copy your API URL, e.g. `https://compara-api.onrender.com`
+8. Your API URL: **https://compara.onrender.com**
 
-Test: open `https://YOUR-SERVICE.onrender.com/api/health` — should show `{"ok":true,...}`
+Test: [https://compara.onrender.com/api/health](https://compara.onrender.com/api/health) — should show `{"ok":true,"llmConfigured":true}`
 
 ---
 
@@ -62,9 +62,9 @@ Test: open `https://YOUR-SERVICE.onrender.com/api/health` — should show `{"ok"
 
 | Name | Value |
 |------|--------|
-| `VITE_API_URL` | `https://YOUR-RENDER-URL.onrender.com/api` |
+| `VITE_API_URL` | `https://compara.onrender.com/api` |
 
-Example: `https://compara-api.onrender.com/api` (must end with `/api`)
+Must end with `/api` — this is your live Render backend.
 
 5. Click **Deploy**.
 6. Copy your Vercel URL, e.g. `https://compara.vercel.app`
